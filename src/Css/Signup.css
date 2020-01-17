@@ -1,0 +1,16 @@
+.avatar-div {
+    border-radius: 50px;
+}
+
+.profile {
+    border: 5px;
+}
+
+.btn-div {
+    padding-top: 10px;       
+}
+
+.btn-log {
+    width: 100%;
+    border-radius: 50px;
+}

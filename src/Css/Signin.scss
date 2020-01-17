@@ -1,0 +1,28 @@
+.background {
+    background-image: url('../Css/Signin.jpg');
+    margin: 0;
+  	padding: 0;
+    width: 100%;  
+    min-height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+
+.signin-card {
+    width: 400px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 25px 50px 25px 50px;
+    box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+    -o-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+    -ms-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
