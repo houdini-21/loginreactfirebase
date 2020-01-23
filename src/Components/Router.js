@@ -4,6 +4,7 @@ import FormularioSignin from "./FormularioSignin";
 import FormularioSignup from "./FormularioSignup";
 import Swal from "sweetalert2";
 import Home from "./Home";
+import Dashboard from './Dashboard'
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import firebaseConfig from "../Css/Config";
@@ -14,14 +15,15 @@ console.log(firebaseApp);
 export default class Router extends Component {
   state = {
     Login: false,
-    Username: null
+    Username: null,
+    redirect: false
   };
 
   signupPost = postSignup => {
     console.log(postSignup);
-    const name = postSignup.username
-    const mail = postSignup.email
-    const pass = postSignup.password
+    const name = postSignup.username;
+    const mail = postSignup.email;
+    const pass = postSignup.password;
 
     firebase
       .auth()
@@ -40,7 +42,7 @@ export default class Router extends Component {
         User.updateProfile({
           displayName: name,
           photoURL: "https://example.com/jane-q-user/profile.jpg"
-        })
+        });
         this.setState({
           Login: true,
           Username: name
@@ -62,22 +64,28 @@ export default class Router extends Component {
     firebase
       .auth()
       .signInWithEmailAndPassword(postSignin.email, postSignin.pass)
-  
+
       .then(user => {
         console.log("loggeado", user);
         Swal.fire({
           icon: "success",
           title: "Bienvenido"
         });
-            let userr = firebase.auth().currentUser;
-      let namee
-      if (userr != null) {
-        namee = userr.displayName;
+        let userr = firebase.auth().currentUser;
+        let namee;
+        if (userr != null) {
+          namee = userr.displayName;
+          this.setState({
+            Login: true,
+            Username: namee,
+            redirect: true
+          });      
       }
-     const resul = JSON.parse(localStorage.getItem("User"));
-      const na = resul.Username
-     console.log(na)
+      
+          
+      
       })
+
       .catch(error => {
         var errorMessage = error.message;
         Swal.fire({
@@ -86,8 +94,9 @@ export default class Router extends Component {
           text: errorMessage
         });
       });
-
-    console.log(postSignin.email);
+    const resul = JSON.parse(localStorage.getItem("User"));
+    const na = resul.Username;
+    console.log(na);
   };
 
   render() {
