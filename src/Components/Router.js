@@ -1,22 +1,26 @@
 import React, { Component } from "react";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import FormularioSignin from "./FormularioSignin";
 import FormularioSignup from "./FormularioSignup";
 import Swal from "sweetalert2";
 import Home from "./Home";
-import Dashboard from './Dashboard'
+import Dashboard from "./Dashboard";
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import firebaseConfig from "../Css/Config";
+import ProtectedRoute from "./ProtectedRoute";
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 console.log(firebaseApp);
 
 export default class Router extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { value: "" };
+  }
+
   state = {
-    Login: false,
-    Username: null,
-    redirect: false
+    Username: null
   };
 
   signupPost = postSignup => {
@@ -42,9 +46,9 @@ export default class Router extends Component {
           photoURL: "https://example.com/jane-q-user/profile.jpg"
         });
         this.setState({
-          Login: true,
           Username: name
         });
+        localStorage.setItem("authToken", "true");
         localStorage.setItem("User", JSON.stringify(this.state));
       })
 
@@ -74,14 +78,11 @@ export default class Router extends Component {
         if (userr != null) {
           namee = userr.displayName;
           this.setState({
-            Login: true,
-            Username: namee,
-            redirect: true
-          });      
-      }
-      
-          
-      
+            Username: namee
+          });
+        }
+
+        localStorage.setItem("authToken", "true");
       })
 
       .catch(error => {
@@ -102,6 +103,7 @@ export default class Router extends Component {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={Home} />
+          <ProtectedRoute exact path="/dashboard" component={Dashboard} />
           <Route
             exact
             path="/signin"
