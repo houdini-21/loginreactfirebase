@@ -36,9 +36,7 @@ export default class Router extends Component {
           title: "Usuario Registrado",
           text: name
         });
-
         const User = firebase.auth().currentUser;
-
         User.updateProfile({
           displayName: name,
           photoURL: "https://example.com/jane-q-user/profile.jpg"
