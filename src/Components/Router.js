@@ -16,12 +16,8 @@ console.log(firebaseApp);
 export default class Router extends Component {
   constructor(props) {
     super(props);
-    this.state = { value: "" };
+    this.state = { Username: null, redirect: true };
   }
-
-  state = {
-    Username: null
-  };
 
   signupPost = postSignup => {
     console.log(postSignup);
@@ -48,6 +44,7 @@ export default class Router extends Component {
         this.setState({
           Username: name
         });
+        window.location = "/dashboard";
         localStorage.setItem("authToken", "true");
         localStorage.setItem("User", JSON.stringify(this.state));
       })
@@ -77,11 +74,13 @@ export default class Router extends Component {
         let namee;
         if (userr != null) {
           namee = userr.displayName;
+
           this.setState({
             Username: namee
           });
+          window.location = "/dashboard";
         }
-
+        localStorage.setItem("User", JSON.stringify(this.state));
         localStorage.setItem("authToken", "true");
       })
 
@@ -93,9 +92,6 @@ export default class Router extends Component {
           text: errorMessage
         });
       });
-    const resul = JSON.parse(localStorage.getItem("User"));
-    const na = resul.Username;
-    console.log(na);
   };
 
   render() {

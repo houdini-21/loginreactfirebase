@@ -1,13 +1,26 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Avatar from "./Avatar";
-import "../Css/Signin.scss";
+import "../Css/Signin.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+
+
+const Eye = ({ filled, onClick }) => {
+  return (
+    <div onClick={onClick}>
+      <FontAwesomeIcon icon={filled ? faEye : faEyeSlash} size="lg" color="Dodgerblue"/>
+    </div>
+  );
+};
 
 export default class FormularioSignup extends Component {
   UserRef = React.createRef();
   EmailRef = React.createRef();
   PassRef = React.createRef();
+  state = { filled: false };
 
+  
   signupPost = (e) => {
     e.preventDefault();
 
@@ -19,6 +32,16 @@ export default class FormularioSignup extends Component {
     console.log(postSignup);
     this.props.signupPost(postSignup);
   };
+
+  showPass = () => {
+    var tipo = document.getElementById("password");
+    if(tipo.type == "password"){
+        tipo.type = "text";
+    }else{
+        tipo.type = "password";
+    }
+    this.setState({ filled: !this.state.filled });
+  }
 
 
   render() {
@@ -47,7 +70,7 @@ export default class FormularioSignup extends Component {
                   />
                   <label htmlFor="email">Email</label>
                 </div>
-                <div className="input-field col s12">
+                 <div className="input-field col s10">
                   <input
                     ref={this.PassRef}
                     type="password"
@@ -55,6 +78,9 @@ export default class FormularioSignup extends Component {
                     className="validate"
                   />
                   <label htmlFor="password">Password</label>
+                </div>
+                <div className="eye col s2">
+                <Eye className='eyecolor' filled={this.state.filled} onClick={this.showPass} />
                 </div>
               </div>
               <div className="btn-div center">

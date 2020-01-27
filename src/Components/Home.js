@@ -7,12 +7,6 @@ import video from '../Css/Homevid.mp4'
 
 
 export default class Home extends Component {
-    
-    state = {
-        login : false
-    }
-
-
     render() {
         return (
             <React.Fragment>

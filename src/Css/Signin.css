@@ -26,3 +26,10 @@
     -ms-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
 }
 
+.eye {
+  padding-top: 35px !important;
+}
+
+.eyecolor {
+  color: #00c482
+}
