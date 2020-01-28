@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from 'axios';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import FormularioSignin from "./FormularioSignin";
 import FormularioSignup from "./FormularioSignup";
@@ -24,7 +25,7 @@ export default class Router extends Component {
     const name = postSignup.username;
     const mail = postSignup.email;
     const pass = postSignup.password;
-
+ const imagen = axios.get(`https://jsonplaceholder.typicode.com/posts`)
     firebase
       .auth()
       .createUserWithEmailAndPassword(mail, pass)
@@ -36,6 +37,8 @@ export default class Router extends Component {
           title: "Usuario Registrado",
           text: name
         });
+        console.log(imagen)
+
         const User = firebase.auth().currentUser;
         User.updateProfile({
           displayName: name,
@@ -44,7 +47,7 @@ export default class Router extends Component {
         this.setState({
           Username: name
         });
-        window.location = "/dashboard";
+//        window.location = "/dashboard";
         localStorage.setItem("authToken", "true");
         localStorage.setItem("User", JSON.stringify(this.state));
       })
