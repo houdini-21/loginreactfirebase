@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from 'axios';
+import axios from "axios";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import FormularioSignin from "./FormularioSignin";
 import FormularioSignup from "./FormularioSignup";
@@ -10,6 +10,17 @@ import * as firebase from "firebase/app";
 import "firebase/auth";
 import firebaseConfig from "../Css/Config";
 import ProtectedRoute from "./ProtectedRoute";
+import notFound from "./404.js";
+var CryptoJS = require("crypto-js");
+ 
+// Encrypt
+var ciphertext = CryptoJS.AES.encrypt('my message', 'secret key 123');
+ 
+// Decrypt
+var bytes  = CryptoJS.AES.decrypt(ciphertext.toString(), 'secret key 123');
+var plaintext = bytes.toString(CryptoJS.enc.Utf8);
+ 
+console.log(plaintext);
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 console.log(firebaseApp);
@@ -25,7 +36,7 @@ export default class Router extends Component {
     const name = postSignup.username;
     const mail = postSignup.email;
     const pass = postSignup.password;
- const imagen = axios.get(`https://jsonplaceholder.typicode.com/posts`)
+    const imagen = axios.get(`https://jsonplaceholder.typicode.com/posts`);
     firebase
       .auth()
       .createUserWithEmailAndPassword(mail, pass)
@@ -37,7 +48,7 @@ export default class Router extends Component {
           title: "Usuario Registrado",
           text: name
         });
-        console.log(imagen)
+        console.log(imagen);
 
         const User = firebase.auth().currentUser;
         User.updateProfile({
@@ -47,7 +58,7 @@ export default class Router extends Component {
         this.setState({
           Username: name
         });
-//        window.location = "/dashboard";
+        window.location = "/dashboard";
         localStorage.setItem("authToken", "true");
         localStorage.setItem("User", JSON.stringify(this.state));
       })
@@ -102,6 +113,7 @@ export default class Router extends Component {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route exact path="*" component={notFound} />
           <ProtectedRoute exact path="/dashboard" component={Dashboard} />
           <Route
             exact
