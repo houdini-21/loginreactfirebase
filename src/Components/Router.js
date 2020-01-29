@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import FormularioSignin from "./FormularioSignin";
 import FormularioSignup from "./FormularioSignup";
@@ -11,19 +10,12 @@ import "firebase/auth";
 import firebaseConfig from "../Css/Config";
 import ProtectedRoute from "./ProtectedRoute";
 import notFound from "./404.js";
-var CryptoJS = require("crypto-js");
- 
-// Encrypt
-var ciphertext = CryptoJS.AES.encrypt('my message', 'secret key 123');
- 
-// Decrypt
-var bytes  = CryptoJS.AES.decrypt(ciphertext.toString(), 'secret key 123');
-var plaintext = bytes.toString(CryptoJS.enc.Utf8);
- 
-console.log(plaintext);
+
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 console.log(firebaseApp);
+
+
 
 export default class Router extends Component {
   constructor(props) {
@@ -36,7 +28,7 @@ export default class Router extends Component {
     const name = postSignup.username;
     const mail = postSignup.email;
     const pass = postSignup.password;
-    const imagen = axios.get(`https://jsonplaceholder.typicode.com/posts`);
+    
     firebase
       .auth()
       .createUserWithEmailAndPassword(mail, pass)
@@ -48,17 +40,18 @@ export default class Router extends Component {
           title: "Usuario Registrado",
           text: name
         });
-        console.log(imagen);
+        const userpic = `https://avatars.dicebear.com/v2/bottts/${name}.svg`;
 
         const User = firebase.auth().currentUser;
         User.updateProfile({
           displayName: name,
-          photoURL: "https://example.com/jane-q-user/profile.jpg"
-        });
+          photoURL: userpic
+        })
         this.setState({
-          Username: name
+          Username: name,
+          Avatar: userpic
         });
-        window.location = "/dashboard";
+         window.location = "/dashboard";
         localStorage.setItem("authToken", "true");
         localStorage.setItem("User", JSON.stringify(this.state));
       })
@@ -86,16 +79,21 @@ export default class Router extends Component {
         });
         let userr = firebase.auth().currentUser;
         let namee;
+        let picuser;
         if (userr != null) {
           namee = userr.displayName;
+          picuser = userr.photoURL;
 
           this.setState({
-            Username: namee
+            Username: namee,
+            Avatar: picuser
           });
           window.location = "/dashboard";
         }
-        localStorage.setItem("User", JSON.stringify(this.state));
+
+        console.log(picuser);
         localStorage.setItem("authToken", "true");
+        localStorage.setItem("User", JSON.stringify(this.state));
       })
 
       .catch(error => {
@@ -112,8 +110,8 @@ export default class Router extends Component {
     return (
       <BrowserRouter>
         <Switch>
+        
           <Route exact path="/" component={Home} />
-          <Route exact path="*" component={notFound} />
           <ProtectedRoute exact path="/dashboard" component={Dashboard} />
           <Route
             exact
@@ -129,6 +127,7 @@ export default class Router extends Component {
               return <FormularioSignup signupPost={this.signupPost} />;
             }}
           />
+          <Route component={notFound} />
         </Switch>
       </BrowserRouter>
     );

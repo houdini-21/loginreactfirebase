@@ -8,7 +8,7 @@ export default class Avatar extends Component {
         <div className="profile">
           <img
             className="avatar-div"
-            src="https://api.adorable.io/avatars/101/thegoodlife12345@gmail.com.png"
+            src="https://avatars.dicebear.com/v2/bottts/example.svg"
           alt="profile"/>
         </div>
         <div className="username-div">
