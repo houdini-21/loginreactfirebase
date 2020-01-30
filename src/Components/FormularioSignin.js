@@ -82,7 +82,7 @@ export default class FormularioSignin extends Component {
                   Signin
                 </button>
                 <p>
-                  No account?<Link to="/Signup"> Create One!!</Link>
+                  No account?<Link to="/signup"> Create One!!</Link>
                 </p>
               </div>
             </form>

@@ -6,10 +6,9 @@ export default class Dashboard extends Component {
     const resul = JSON.parse(localStorage.getItem("User"));
     const name = resul.Username;
     const pic = resul.Avatar;
-
-    console.log(pic)
+    console.log(pic);
     function logout() {
-      localStorage.clear();
+      localStorage.removeItem("authToken");
       firebase.auth().signOut();
       window.location = "/dashboard";
     }

@@ -1,18 +1,22 @@
 import React, { Component } from "react";
 import "../Css/Signup.css";
+let pic = "https://avatars.dicebear.com/v2/bottts/example.svg";
+let name = "New Use";
 
 export default class Avatar extends Component {
   render() {
+    const resul = JSON.parse(localStorage.getItem("User"));
+    if (resul !== null) {
+      name = " back, " + resul.Username + ", what's up?";
+      pic = resul.Avatar;
+    }
     return (
       <div>
         <div className="profile">
-          <img
-            className="avatar-div"
-            src="https://avatars.dicebear.com/v2/bottts/example.svg"
-          alt="profile"/>
+          <img className="avatar-div" src={pic} alt="profile" />
         </div>
         <div className="username-div">
-          <h5>Welcome back, buddy, what's up?</h5>
+          <h5>Welcome {name}</h5>
         </div>
       </div>
     );

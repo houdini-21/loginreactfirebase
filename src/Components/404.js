@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import '../Css/404.css'
+import '../Css/404.css';
+import { Link } from "react-router-dom";
+
 
 export default class notFound extends Component {
   render() {
@@ -9,7 +11,7 @@ export default class notFound extends Component {
             <h2>404</h2>
             <h4>Opps! Page not found</h4>
             <p>the page you were looking for doesn't exit</p>
-            <a>Back To Home</a>
+            <Link to="/Signin">Back to Home</Link>
         </div>
       </div>
     )
