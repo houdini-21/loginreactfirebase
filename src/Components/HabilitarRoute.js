@@ -2,25 +2,26 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
 const key = localStorage.getItem("authToken");
-
-
-const ProtectedRoute = ({ component: Component, ...rest }) => (
+const HabilitarRuta = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      key === 'true' ? (
+      key === 'false' ? (
         //si es postivo redirecciona el componente con la etiqueta <protectedRoute>
         <Component {...props} />
       ) : (
-        //sino te envia a /
         <Redirect
-          to={{
-            pathname: "/",
-            state: { from: props.location }
-          }}
-        />
+        to={{
+          pathname: "/dashboard",
+          state: { from: props.location }
+        }}
+      />
+ 
+        //sino te envia a /
+
       )
     }
   />
 );
-export default ProtectedRoute;
+export default HabilitarRuta;
+

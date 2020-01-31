@@ -5,6 +5,7 @@ import "../Css/Signin.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
+
 const Eye = ({ filled, onClick }) => {
   return (
     <div onClick={onClick}>
@@ -12,7 +13,6 @@ const Eye = ({ filled, onClick }) => {
     </div>
   );
 };
-
 export default class FormularioSignin extends Component {
   EmailRef = React.createRef();
   PassRef = React.createRef();

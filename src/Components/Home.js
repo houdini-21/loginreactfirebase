@@ -14,8 +14,8 @@ export default class Home extends Component {
                 <video autoPlay muted loop>
                     <source src={video} type="video/mp4" />
                 </video>
-                <Link className="fa" to='/signin' aria-hidden="true"><FontAwesomeIcon icon={faUserPlus} /></Link>
-                <Link className="fa" to='/signup' aria-hidden="true"><FontAwesomeIcon icon={faSignInAlt} /></Link>
+                <Link className="fa" to='/signup' aria-hidden="true"><FontAwesomeIcon icon={faUserPlus} /></Link>
+                <Link className="fa" to='/signin' aria-hidden="true"><FontAwesomeIcon icon={faSignInAlt} /></Link>
             </div>
             </React.Fragment>
         )

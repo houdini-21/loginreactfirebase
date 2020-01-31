@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "../Css/Signup.css";
 let pic = "https://avatars.dicebear.com/v2/bottts/example.svg";
-let name = "New Use";
+let name = "User";
 
 export default class Avatar extends Component {
   render() {

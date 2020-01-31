@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Avatar from "./Avatar";
+import AvatarSignup from "./AvatarSIgnup";
 import "../Css/Signin.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-
 
 const Eye = ({ filled, onClick }) => {
   return (
@@ -15,11 +14,13 @@ const Eye = ({ filled, onClick }) => {
 };
 
 export default class FormularioSignup extends Component {
+
   UserRef = React.createRef();
   EmailRef = React.createRef();
   PassRef = React.createRef();
   state = { filled: false };
 
+  
   
   signupPost = (e) => {
     e.preventDefault();
@@ -51,7 +52,7 @@ export default class FormularioSignup extends Component {
           <div className="row">
             <form  className="col s12" onSubmit={this.signupPost}>
               <div className="row center">
-                <Avatar />
+                <AvatarSignup />
                 <div className="input-field col s12">
                   <input
                     ref={this.UserRef}

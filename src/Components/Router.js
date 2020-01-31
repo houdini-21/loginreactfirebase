@@ -10,14 +10,13 @@ import "firebase/auth";
 import firebaseConfig from "../Css/Config";
 import ProtectedRoute from "./ProtectedRoute";
 import notFound from "./404.js";
-
+//import HabilitarRuta from "./HabilitarRoute";
+//import HabilitarRuta from './HabilitarRoute'
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 console.log(firebaseApp);
-
-
-
 export default class Router extends Component {
+ 
   constructor(props) {
     super(props);
     this.state = { Username: null, redirect: true };
@@ -28,12 +27,13 @@ export default class Router extends Component {
     const name = postSignup.username;
     const mail = postSignup.email;
     const pass = postSignup.password;
-    
+
     firebase
       .auth()
       .createUserWithEmailAndPassword(mail, pass)
 
       .then(user => {
+
         console.log("registrado", user);
         Swal.fire({
           icon: "success",
@@ -46,12 +46,12 @@ export default class Router extends Component {
         User.updateProfile({
           displayName: name,
           photoURL: userpic
-        })
+        });
         this.setState({
           Username: name,
           Avatar: userpic
         });
-         window.location = "/dashboard";
+        window.location = "/dashboard";
         localStorage.setItem("authToken", "true");
         localStorage.setItem("User", JSON.stringify(this.state));
       })
@@ -110,7 +110,6 @@ export default class Router extends Component {
     return (
       <BrowserRouter>
         <Switch>
-        
           <Route exact path="/" component={Home} />
           <ProtectedRoute exact path="/dashboard" component={Dashboard} />
           <Route

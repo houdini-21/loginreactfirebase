@@ -8,9 +8,9 @@ export default class Dashboard extends Component {
     const pic = resul.Avatar;
     console.log(pic);
     function logout() {
-      localStorage.removeItem("authToken");
+      localStorage.setItem("authToken", "false");
       firebase.auth().signOut();
-      window.location = "/dashboard";
+      window.location = "/";
     }
     return (
       <div>
