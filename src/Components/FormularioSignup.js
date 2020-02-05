@@ -1,5 +1,6 @@
-import React, { Component } from "react";
+import React, { Component, Suspense, lazy  } from "react";
 
+const Signup = React.lazy(() => import("./Signup"));
 
 
 export default class FormularioSignup extends Component {
@@ -7,7 +8,6 @@ export default class FormularioSignup extends Component {
   UserRef = React.createRef();
   EmailRef = React.createRef();
   PassRef = React.createRef();
-  state = { filled: false };
 
   
   
@@ -36,7 +36,11 @@ export default class FormularioSignup extends Component {
 
   render() {
     return (
- 
+ <div>
+<Suspense fallback={<h1>Loading...</h1>}>
+          <Signup />
+        </Suspense>
+ </div>
     );
   }
 }

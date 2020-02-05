@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "../Css/Signup.css";
 
 export default class AvatarSignup extends Component {
+  state = { filled: false };
+
   render() {
     return (
       <div>
