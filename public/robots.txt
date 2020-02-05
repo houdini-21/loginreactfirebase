@@ -1,2 +1,15 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
+
+
+
+deezer
+luna@live.no
+elmayoneso21
+
+spotify
+Sptj@yeho.com
+elmayoneso
+
+amazon prime
+ houdini23244224@gmail.com
