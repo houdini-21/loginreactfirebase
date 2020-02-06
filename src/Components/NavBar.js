@@ -1,24 +1,24 @@
 import React, { Component } from "react";
 import "../Css/Dashboard.css";
+import { Link } from "react-router-dom";
 
 export default class NavBar extends Component {
   render() {
     const resul = JSON.parse(localStorage.getItem("User"));
-    const name = resul.Username;
     const pic = resul.Avatar;
     return (
         <div>
       <nav>
         <div className="nav-wrapper">
-          <a href="#" className="brand-logo right" data-target="slide-out">
+          <Link to='#' className="brand-logo right" data-target="slide-out">
           <img src={pic} alt="profile" className="Navbar-Avatar" />
-          </a>
+          </Link>
           <ul id="nav-mobile" className="left hide-on-med-and-down">
             <li>
-              <a href="sass.html">Sass</a>
+              <Link to='#'>Sass</Link>
             </li>
             <li>
-              <a href="badges.html">Components</a>
+              <Link to='#'>Components</Link>
             </li>
           </ul>
         </div>

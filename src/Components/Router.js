@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { Component, lazy, Suspense } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import FormularioSignin from "./FormularioSignin";
-import FormularioSignup from "./FormularioSignup";
+//import FormularioSignin from "./FormularioSignin";
+//import FormularioSignup from "./FormularioSignup";
 import Swal from "sweetalert2";
 import Home from "./Home";
 import Dashboard from "./Dashboard";
@@ -10,13 +10,15 @@ import "firebase/auth";
 import firebaseConfig from "../Css/Config";
 import ProtectedRoute from "./ProtectedRoute";
 import notFound from "./404.js";
+import Loading from "./Loading";
 //import HabilitarRuta from "./HabilitarRoute";
 //import HabilitarRuta from './HabilitarRoute'
+const FormularioSignin = lazy(() => import("./FormularioSignin"));
+const FormularioSignup = lazy(() => import("./FormularioSignup"));
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 console.log(firebaseApp);
 export default class Router extends Component {
- 
   constructor(props) {
     super(props);
     this.state = { Username: null, redirect: true };
@@ -33,7 +35,6 @@ export default class Router extends Component {
       .createUserWithEmailAndPassword(mail, pass)
 
       .then(user => {
-
         console.log("registrado", user);
         Swal.fire({
           icon: "success",
@@ -112,20 +113,22 @@ export default class Router extends Component {
         <Switch>
           <Route exact path="/" component={Home} />
           <ProtectedRoute exact path="/dashboard" component={Dashboard} />
-          <Route
-            exact
-            path="/signin"
-            render={() => {
-              return <FormularioSignin signinPost={this.signinPost} />;
-            }}
-          />
-          <Route
-            exact
-            path="/signup"
-            render={() => {
-              return <FormularioSignup signupPost={this.signupPost} />;
-            }}
-          />
+          <Suspense fallback={<Loading />}>
+            <Route
+              exact
+              path="/signin"
+              render={() => {
+                return <FormularioSignin signinPost={this.signinPost} />;
+              }}
+            />
+            <Route
+              exact
+              path="/signup"
+              render={() => {
+                return <FormularioSignup signupPost={this.signupPost} />;
+              }}
+            />
+          </Suspense>
           <Route component={notFound} />
         </Switch>
       </BrowserRouter>
