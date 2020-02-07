@@ -1,7 +1,7 @@
 import React, { Component, lazy, Suspense } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-//import FormularioSignin from "./FormularioSignin";
-//import FormularioSignup from "./FormularioSignup";
+import FormularioSignin from "./FormularioSignin";
+import FormularioSignup from "./FormularioSignup";
 import Swal from "sweetalert2";
 import Home from "./Home";
 import Dashboard from "./Dashboard";
@@ -13,15 +13,25 @@ import notFound from "./404.js";
 import Loading from "./Loading";
 //import HabilitarRuta from "./HabilitarRoute";
 //import HabilitarRuta from './HabilitarRoute'
-const FormularioSignin = lazy(() => import("./FormularioSignin"));
-const FormularioSignup = lazy(() => import("./FormularioSignup"));
+//const FormularioSignin = lazy(() => import("./FormularioSignin"));
+//const FormularioSignup = lazy(() => import("./FormularioSignup"));
+//const Home = lazy(() => import("./Home"));
+//const Dashboard = lazy(() => import("./Dashboard"));
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 console.log(firebaseApp);
 export default class Router extends Component {
   constructor(props) {
     super(props);
-    this.state = { Username: null, redirect: true };
+    this.state = { Username: null, redirect: true, render: false };
+  }
+  componentDidMount() {
+    setTimeout(
+      function() {
+        this.setState({ render: true });
+      }.bind(this),
+      4000
+    );
   }
 
   signupPost = postSignup => {
@@ -111,9 +121,9 @@ export default class Router extends Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={Home} />
-          <ProtectedRoute exact path="/dashboard" component={Dashboard} />
-          <Suspense fallback={<Loading />}>
+          
+            <Route exact path="/" component={Home} />
+            <ProtectedRoute exact path="/dashboard" component={Dashboard} />
             <Route
               exact
               path="/signin"
@@ -128,8 +138,9 @@ export default class Router extends Component {
                 return <FormularioSignup signupPost={this.signupPost} />;
               }}
             />
-          </Suspense>
-          <Route path="*" component={notFound} />
+            
+       
+          <Route component={notFound} />
         </Switch>
       </BrowserRouter>
     );
