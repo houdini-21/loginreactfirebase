@@ -129,7 +129,7 @@ export default class Router extends Component {
               }}
             />
           </Suspense>
-          <Route component={notFound} />
+          <Route path="*" component={notFound} />
         </Switch>
       </BrowserRouter>
     );
