@@ -6,7 +6,7 @@ import ProgressButton from "react-progress-button";
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import Eye from "./Icon";
-import "../Css/Signin.css";
+import "../Css/Login.scss";
 
 export default class FormularioSignin extends Component {
   state = { filled: false };
@@ -42,11 +42,10 @@ export default class FormularioSignin extends Component {
             function() {
               window.location = "/";
             }.bind(this),
-            1000
+            500
           );
         }
 
-        console.log(picuser);
         localStorage.setItem("authToken", "true");
         localStorage.setItem("User", JSON.stringify(this.state));
       })

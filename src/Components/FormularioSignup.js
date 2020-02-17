@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import ProgressButton from "react-progress-button";
 import AvatarSignup from "./AvatarSIgnup";
 import Eye from "./Icon";
-import "../Css/Signin.css";
+import "../Css/Login.scss";
 import * as firebase from "firebase/app";
 import "firebase/auth";
 
@@ -45,7 +45,13 @@ export default class FormularioSignup extends Component {
           Avatar: userpic,
           buttonState: "success"
         });
-        window.location = "/";
+        setTimeout(
+          function() {
+            window.location = "/";
+          }(this),
+          1500
+        );
+        
         localStorage.setItem("authToken", "true");
         localStorage.setItem("User", JSON.stringify(this.state));
       })

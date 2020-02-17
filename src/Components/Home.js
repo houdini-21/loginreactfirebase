@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import '../Css/Home.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faSignInAlt, faUserPlus	 } from '@fortawesome/free-solid-svg-icons';
-import video from '../Css/Homevid.mp4'
+import video from '../Img/Homevid.mp4'
 
 
 export default class Home extends Component {

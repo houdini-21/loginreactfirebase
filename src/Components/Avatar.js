@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../Css/Signup.css";
+import "../Css/Avatar.css";
 let pic = "https://avatars.dicebear.com/v2/bottts/example.svg";
 let name = "User";
 

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../Css/Signup.css";
+import "../Css/Login.scss";
 
 export default class AvatarSignup extends Component {
   state = { filled: false };
