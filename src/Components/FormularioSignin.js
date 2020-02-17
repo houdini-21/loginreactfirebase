@@ -32,7 +32,6 @@ export default class FormularioSignin extends Component {
         if (userr != null) {
           namee = userr.displayName;
           picuser = userr.photoURL;
-
           this.setState({
             Username: namee,
             Avatar: picuser,
