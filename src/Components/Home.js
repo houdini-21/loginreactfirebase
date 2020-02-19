@@ -11,12 +11,16 @@ export default class Home extends Component {
       <React.Fragment>
         <div className="banner">
           <video
-            autoPlay
-            muted
             loop
+            muted
+            autoPlay
             src={video}
-            type="video/mp4"
             preload={"auto"}
+            type={"video/mp4"}
+            //onLoadedData={() => {
+            //console.log("Data is loaded!");
+            // this.setState({ isLoading: false });
+            //}}
           ></video>
           <Link className="fa" to="/signup" aria-hidden="true">
             <FontAwesomeIcon icon={faUserPlus} />
